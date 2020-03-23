@@ -22,7 +22,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('docs/', include('django_mkdocs.urls')),
     url(r'mdeditor/', include('mdeditor.urls')),
     url(r'', include('core.urls')),
 ]
