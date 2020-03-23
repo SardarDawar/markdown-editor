@@ -1,0 +1,89 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block title %} Docs{% endblock %}
+
+
+<style>
+    a {
+        color: rgb(250, 91, 91);
+    }
+
+ 
+</style>
+{% block register %}
+
+{% if request.user.is_authenticated  %}
+<div class="register-login-area">
+
+
+
+
+    <a href="{% url 'profile' request.user.username  %}" class="btn">{{ request.user.username }}</a>
+    <a href="{% url 'logout' %}" class="btn">logout</a>
+
+</div>
+{% else %}
+<div class="register-login-area">
+    <a href="{% url 'register' %}" class="btn">Register</a>
+    <a href="{% url 'login' %}" class="btn">Login</a>
+</div>
+{% endif %}
+{% endblock  %}
+
+
+
+
+
+{% block content %}
+
+<!-- ##### Hero Area Start ##### -->
+<section class="hero-area bg-img bg-overlay-2by5"
+    style="background-image: url( '{% static "music/bg-img/bg1.jpg" %}' );">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <!-- Hero Content -->
+                <div class="hero-content text-center">
+
+                    {% if request.user.is_authenticated  %}
+                    <h2>Let's Create Documentations</h2>
+                    <h3 class="text-white">Scroll down to see more</h3>
+                    {% else %}
+                    <h2>Let's Create Documentations</h2>
+                    <a href="{% url 'login' %}" class="btn clever-btn">Get Started</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Hero Area End ##### -->
+
+<!-- ##### Cool Facts Area Start ##### -->
+{% if request.user.is_authenticated  %}
+
+<section class="cool-facts-area section-padding-100-0">
+    <div class="container"  >
+        <div class="row">
+            <!-- Single Cool Facts Area -->
+            <div class="col-12 col-sm-6 col-lg-3"   >
+                <div class="single-cool-facts-area text-center mb-100 wow fadeInUp"  style="border:solid; border-color:#F00;box-shadow: 5px 10px #888888;" data-wow-delay="250ms">
+                    <div class="icon">
+                        <img src="{% static  'music/core-img/docs.png' %}" alt="">
+                    </div>
+                    <a href="{% url 'list' %}">Documentation </a>
+
+
+                </div>
+            </div>
+    
+            <!-- Single Cool Facts Area -->
+            {% endif %}
+            <!-- ##### Popular Courses End ##### -->
+
+            <!-- ##### Best Tutors Start ##### -->
+
+            <!-- ##### Upcoming Events End ##### -->
+
+
+            {% endblock content %}

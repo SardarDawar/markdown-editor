@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Docs{% endblock %}</title>
+    <link rel="shortcut icon" href="{% static 'music/core-img/alum.png' type='image/x-icon' %}">
+    <link rel="stylesheet" href="{% static 'music/css/style1.css' %}">
+    <link href="{% static 'mdeditor/css/editormd.min.css' %}" rel="stylesheet">
+    <link href="{% static 'mdeditor/css/editormd.preview.css' %}" rel="stylesheet">
+
+    <style>
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu>.dropdown-menu {
+            top: 10%;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: 0;
+            border-radius: 0.25rem;
+            display: none;
+        }
+
+        .dropdown-submenu:hover>.dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-submenu>a::after {
+            border-bottom: 0.3em solid transparent;
+            border-left-color: inherit;
+            border-left-style: solid;
+            border-left-width: 0.3em;
+            border-top: 0.3em solid transparent;
+            content: " ";
+            display: block;
+            float: right;
+            height: 0;
+            margin-right: -0.6em;
+            margin-top: -0.95em;
+            width: auto;
+            display: none;
+        }
+
+        .dropdown-submenu.pull-left {
+            float: none;
+            display: none;
+        }
+
+        .dropdown-submenu.pull-left>.dropdown-menu {
+            left: -70%;
+        }
+
+        .dropdown-menu .divider {
+            background-color: #e5e5e5;
+            height: 1px;
+            margin: 0px 0;
+            overflow: hidden;
+        }
+
+        a {
+            color: rgb(13, 172, 92);
+
+        }
+
+        a:hover {
+        color: black;
+        /* background-color: rgb(250, 91, 91); */
+
+    }
+
+        .btn {
+            background-color: rgb(13, 172, 92);
+            border: rgb(7, 133, 70)
+        }
+        .btn:hover {
+            background-color:rgb(7, 133, 70);
+        }
+    </style>
+    <style>
+
+  
+        .sidenav {
+          height: 100%;
+          width: 200px;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: rgb(255, 250, 250);
+          overflow-x: hidden;
+          padding-top: 20px;
+        }
+        
+        .sidenav a {
+          padding: 6px 8px 6px 16px;
+          text-decoration: none;
+          font-size: 16px;
+          color: rgb(13, 172, 92);
+          display: block;
+        }
+        
+        .sidenav a:hover {
+          color: #5ae438;
+        }
+        
+        .main {
+          margin-left: 160px; /* Same as the width of the sidenav */
+          font-size: 16px; /* Increased text to enable scrolling */
+          padding: 0px 10px;
+        }
+        
+        @media screen and (max-height: 450px) {
+          .sidenav {padding-top: 25px;}
+          .sidenav a {font-size: 14px;}
+        }
+        </style>
+</head>
+
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+
+        <!-- Top Header Area -->
+
+
+        <!-- Navbar Area -->
+        <div class="clever-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="cleverNav"
+                    style="background-color:rgb(7, 133, 70);height: 15%">
+
+                    <!-- Logo -->
+                    <a class="nav-brand text-white" href="{% url 'home' %}"><strong>DOCS</strong></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+
+                        <!-- Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="{% url 'home' %}">Home</a></li>
+                                {% if request.user.is_authenticated %}
+                                {% endif %}
+                                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+
+                            </ul>
+
+                            <!-- Search Button -->
+
+
+                            <!-- Register / Login -->
+                            {% block register %}
+
+                            <div class="register-login-area">
+                                {% if request.user.is_authenticated %}
+                                <a href="{% url 'profile' request.user.username  %}"
+                                    class="btn">{{ request.user.username }}</a>
+                                <a href="{% url 'logout' %}" class="btn">logout</a>
+
+                                {% else %}
+                                <a href="{% url 'register' %}" class="btn">Register</a>
+                                <a href="{% url 'login' %}" class="btn active">Login</a>
+                                {% endif %}
+                            </div>
+                            {%  endblock %}
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+
+    {% block content %}
+
+    {% endblock %}
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+<script src="{% static 'mdeditor/js/jquery.min.js' %}"></script>
+<script src="{% static 'mdeditor/js/editormd.min.js' %}"></script>
+<script src="{% static 'mdeditor/js/lib/marked.min.js' %}"></script>
+<script src="{% static 'mdeditor/js/lib/prettify.min.js' %}"></script>
+<script src="{% static 'mdeditor/js/lib/raphael.min.js' %}"></script>
+<script src="{% static 'mdeditor/js/lib/underscore.min.js' %}"></script>
+<script src="{% static 'mdeditor/js/lib/sequence-diagram.min.js' %}"></script>
+<script src="{% static 'mdeditor/js/lib/flowchart.min.js' %}"></script>
+<script src="{% static 'mdeditor/js/lib/jquery.flowchart.min.js' %}"></script>
+<script>
+  $(function () {
+      // content is the id of the <tag> you want to be render.
+      // Refer to the link of the template shared with this answer.
+      editormd.markdownToHTML("content", {
+          emoji           : true,
+          taskList        : true,
+          tex             : true,  
+          flowChart       : true,  
+          sequenceDiagram : true,  
+      });
+  })
+
+</script>
+   
+ 
+    <!-- Active js -->
+    <script src="{% static 'music/js/active.js' %}"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+<!--BOOTSTRAP GRID HERE-->
+
+
+{% block content %}
+
+
+<!--REGULAR POSTS STARTS FOM HERE-->
+
+<div class="article-list">
+<h3 style="text-align: center;">Documentations</h3>
+  <br>
+<div class="row">
+    {% for  blogs in article  %}
+    {% if blogs.public %}
+    <div class="col-md-4">
+    <article class="card-horizontal" {% if forloop.counter > 8 %}style="display: none"{% endif %}>
+        {% if blogs.image %}
+        <div class="card-thumb" data-bg="/media/{{blogs.image}}">
+            <a href="{% url 'completeArticle' blogs.slug %}"><img src="/media/{{blogs.image}}" height="70%" width="70%" > </a>
+        </div>
+        {% endif %}
+        <div class="card-detail">
+            <h2 class="post-title"><a href="{% url 'completeArticle' blogs.slug %}" >{{blogs.Name}}</a></h2> 
+        
+            <div class="text-right"><a href="{% url 'completeArticle' blogs.slug %}" >READ MORE</a></div>
+        </div>
+    </article>
+</div>
+{% endif %}
+    {% endfor %}
+
+    {% for  blog in private  %}
+    {% for  blogs in blog  %}
+    <div class="col-md-4">
+    <article class="card-horizontal" {% if forloop.counter > 8 %}style="display: none"{% endif %}>
+        {% if blogs.image %}
+        <div class="card-thumb" data-bg="/media/{{blogs.image}}">
+            <a href="{% url 'completeArticle' blogs.slug %}"><img src="/media/{{blogs.image}}" > </a>
+        </div>
+        {% endif %}
+        <div class="card-detail">
+            <h2 class="post-title"><a href="{% url 'completeArticle' blogs.slug %}" >{{blogs.Name}}</a></h2> 
+        
+            <div class="text-right"><a href="{% url 'completeArticle' blogs.slug %}" >READ MORE</a></div>
+        </div>
+    </article>
+</div>
+{% endfor %}
+{% endfor %}
+    
+</div>
+
+
+
+
+</div>
+
+{% endblock %}

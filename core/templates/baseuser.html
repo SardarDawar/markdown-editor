@@ -1,0 +1,55 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+{% if request.user.is_authenticated %}
+
+  
+  
+  <div class="sidenav">
+    <br> <br> 
+      <a class="nav-link {% if section == 'editProfile' %}active{% endif %} " href="{% url 'edit_profile' %}">
+        <span class="fa fa-edit"></span>
+        Edit Profile
+        {% if section == 'editProfile' %}
+        <span class="sr-only">(current)</span>
+        {% endif %}
+      </a>
+
+      <a class="nav-link" href="{% url 'list' %}">
+        <span class="fa fa-list"></span>
+        Documentations
+      </a>
+
+      <a class="nav-link" href="{% url 'ParentCategoryview' %}">
+        <span class="fa fa-plus"></span>
+        Create Documentation
+      </a>
+    
+      <a class="nav-link" href="{% url 'Categoryview' %}">
+        <span class="fa fa-plus"></span>
+          Create Chapter Title
+      </a>
+    
+      <a class="nav-link" href="{% url 'doccreate' %}">
+        <span class="fa fa-plus"></span>
+        Create Chapter
+      </a>
+    
+  
+  </div>
+  
+{% if form %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+{% else %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"style="background-image: url({% static 'bg.jpeg' %});height:500px; background-repeat: no-repeat;
+" >
+{% endif %}
+      {% block content2 %}
+      {% endblock %}
+
+    </main>
+    {% endif %}
+    {% endblock %}

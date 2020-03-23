@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{{blogs.title}} | {{block.super}}{% endblock %}
+
+
+{% block content %}
+
+
+
+
+<div class="sidenav">
+    <!--Styling of accordion-->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style type="text/css">
+        [data-toggle="collapse"]:after {
+            display: inline-block;
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            content: "\f054";
+            transform: rotate(90deg);
+            transition: all linear 0.25s;
+            float: right;
+        }
+
+        [data-toggle="collapse"].collapsed:after {
+            transform: rotate(0deg);
+        }
+    </style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        window.alert = function () { };
+        var defaultCSS = document.getElementById('bootstrap-css');
+        function changeCSS(css) {
+            if (css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="' + css + '" type="text/css" />');
+            else $('head > link').filter(':first').replaceWith(defaultCSS);
+        }
+        $(document).ready(function () {
+            var iframe_height = parseInt($('html').height());
+            window.parent.postMessage(iframe_height, 'https://bootsnipp.com');
+        });
+    </script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    </link>
+
+    <!-- Styling Ends Here -->
+    <br><br>
+    <div id="accordion" role="tablist">
+
+        <div class="card">
+            {% for category , articles in lis.items %}
+            {% if forloop.counter == 1 %}
+            <div class="card-header" role="tab" id="headingOne">
+                <h5 class="mb-0">
+                    <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        {{category}}
+                    </a>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse " role="tabpanel" aria-labelledby="headingOne"
+                data-parent="#accordion">
+                <div class="card-body">
+
+                    {% for article in articles %}
+                    <a href="{% url 'detail' article.slug1 %}"><span
+                            class="fa fa-dot-circle-o"></span>&nbsp;&nbsp;&nbsp;{{article}}</a>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+        </div>
+
+        <div class="card">
+            {% for category , articles in lis.items %}
+            {% if forloop.counter > 1 %}
+            <div class="card-header" role="tab" id="headingtwo">
+                <h5 class="mb-0">
+                    <a data-toggle="collapse" href="#collapsetwo" aria-expanded="true" aria-controls="collapseOne">
+                        {{category}}
+                    </a>
+                </h5>
+            </div>
+            <div id="collapsetwo" class="collapse " role="tabpanel" aria-labelledby="headingtwo"
+                data-parent="#accordion">
+                <div class="card-body">
+                    {% for article in articles %}
+                    <a href="{% url 'detail' article.slug1 %}"><span
+                            class="fa fa-dot-circle-o"></span>&nbsp;&nbsp;&nbsp;{{article}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+
+
+</div>
+{% if blogs %}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+    {% block content1 %}
+    <article class="single">
+        <div class="before-main hero-thumb">
+            <div class="hero-wrapper">
+                <div class="hero-meta">
+                    <h1 class="post-title">{{blogs.title}}</h1>
+                </div>
+                <div class="hero-cover"
+                    style="background-image: url(/media/{{blogs.image}}); background-size: cover; background-position: center; ">
+                    <img src="/media/{{blogs.image}}" alt="{{ blogs.title }}" />
+                </div>
+            </div>
+        </div>
+
+        <div id="content"><textarea>{{ blogs.description }}</textarea></div>
+
+        </div>
+
+    </article>
+    {% endblock %}
+    {% else %}
+    <h3 style="text-align: center;">{{Parent}}</h3>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" style="background-image: url(/media/{{Parent.image}});height:500px; background-repeat: no-repeat;
+    ">
+    </main>
+    {% endif %}
+
+    {% endblock %}
+
+
+
+
+
+    <!-- <div id="accordion">
+    {% for category , articles in lis.items %}
+
+    <h3>{{category}}</h3>
+
+    <p>
+        {% for article in articles %}
+        <a href="{% url 'detail' article.slug1 %}">{{article}}</a>
+        {% endfor%}
+
+    </p>
+
+    {% endfor %}
+
+</div> -->

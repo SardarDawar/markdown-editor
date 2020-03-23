@@ -1,0 +1,27 @@
+{% extends 'music/complete.html' %}
+
+{% load static %}
+
+{% block title %}{{blogs.title}} | {{block.super}}{% endblock %}
+
+{% block content1 %}
+
+
+<article class="single">
+    <div class="before-main hero-thumb">
+        <div class="hero-wrapper">
+            <div class="hero-meta">
+                <h1 class="post-title">{{blogs.title}}</h1>
+            </div>
+            <div class="hero-cover" style="background-image: url(/media/{{blogs.image}}); background-size: cover; background-position: center; ">
+                <img src="/media/{{blogs.image}}"alt="{{ blogs.title }}" />
+            </div>
+        </div>
+    </div>
+
+    <div id="content"><textarea>{{ blogs.description }}</textarea></div>
+
+     </div>
+
+</article>
+{% endblock %}
