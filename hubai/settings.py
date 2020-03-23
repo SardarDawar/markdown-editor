@@ -27,7 +27,7 @@ DEBUG = True
 
 SEND = False
 
-ALLOWED_HOSTS = ['127.0.0.1','157.245.205.246']
+ALLOWED_HOSTS = ['127.0.0.1','165.227.194.38']
 
 
 # Application definition
@@ -147,7 +147,7 @@ LOGOUT_URL = reverse_lazy('logout')
 
 #------------------------------------------------------------------------
 #Email Setting...
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'futuresoftcode@gmail.com'
