@@ -3,13 +3,7 @@
 {% block title %} Docs{% endblock %}
 
 
-<style>
-    a {
-        color: rgb(250, 91, 91);
-    }
 
- 
-</style>
 {% block register %}
 
 {% if request.user.is_authenticated  %}
@@ -18,14 +12,14 @@
 
 
 
-    <a href="{% url 'profile' request.user.username  %}" class="btn">{{ request.user.username }}</a>
-    <a href="{% url 'logout' %}" class="btn">logout</a>
+    <a href="{% url 'profile' request.user.username  %}" style="background-color: azure;">{{ request.user.username }}</a>
+    <a href="{% url 'logout' %}" style="background-color: azure;">logout</a>
 
 </div>
 {% else %}
 <div class="register-login-area">
-    <a href="{% url 'register' %}" class="btn">Register</a>
-    <a href="{% url 'login' %}" class="btn">Login</a>
+    <a href="{% url 'register' %}" style="background-color: azure;">Register</a>
+    <a href="{% url 'login' %}" style="background-color: azure;">Login</a>
 </div>
 {% endif %}
 {% endblock  %}

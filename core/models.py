@@ -32,6 +32,7 @@ from django.db import models
         
 class Parent_Category(models.Model):
     Name      =       models.CharField(max_length=500)
+    description      =       models.TextField(max_length=500)
     slug      =       models.CharField(max_length=500)
     image       =       models.ImageField(blank=True)
     public    =  models.BooleanField(default=True)

@@ -181,6 +181,8 @@ def BlogList(request):
                 print(j)
                 private_list.append(Parent_Category.objects.filter(Name=i.Name))
     print(private_list)
+    for i in private_list:
+        print(i[0])
     context = {
     'article':Parent,
     'private':private_list
@@ -213,10 +215,11 @@ def BlogDetail(request, slug):
         articles= Article.objects.filter( catagory=i,status="published")
         art.update({i:articles})
 
-
+    print(parent_cat)
     context = {
         'blogs': article,
-        'lis':art
+        'lis':art,
+        'Parent':parent_cat,
 
     }
     return render(request, 'music/complete.html', context)
