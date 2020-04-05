@@ -15,7 +15,9 @@
     }
 
     </style>
+    {% if user.writer %}
     <a class="btn btn-primary" style="margin-left: 90%;" href="{% url 'ParentCategoryview' %}"> Create Docs </a>
+    {% endif %}
     <br>
     <br>
 <div class="row">
@@ -35,8 +37,11 @@
          </div> 
          <div class="col-md-4"></div>
             <div class="col-md-2">
+                {% if user.writer %}
+
                 <a href="{% url 'ParentCategoryEditView' blogs.id %}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </div>
+            {% endif %}
+                </div>
             </div>
             <p class="post-title" style="text-align: left; ">{{blogs.description}}</p>   
 
@@ -50,7 +55,6 @@
 </div>
 <div class="row">
 {% if private %}
-<h4>Private Articles</h4>
     {% for  blogs in private  %}
     {% for  blogs in blogs  %}
     <div class="col-md-4">

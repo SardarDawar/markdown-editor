@@ -171,6 +171,7 @@ def contact(request):
 
 
 def BlogList(request):
+    user=profileModel.objects.get(user=request.user)
     Parent = Parent_Category.objects.filter(public=True)
     test = Parent_Category.objects.filter(public=False)
     private_list=[]
@@ -185,7 +186,8 @@ def BlogList(request):
         print(i[0])
     context = {
     'article':Parent,
-    'private':private_list
+    'private':private_list,
+    'user':user
 
     }
     return render(request, 'music/list.html', context)
