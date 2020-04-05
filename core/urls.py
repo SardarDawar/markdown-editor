@@ -37,6 +37,12 @@ urlpatterns = [
     url(r'^completeArticle/(?P<slug>[-\w]+)/$',views.completeArticle,name='completeArticle'),
     url(r'^ParentCategoryview/$', views.ParentCategoryview, name="ParentCategoryview"),
     url(r'^Categoryview/$', views.Categoryview, name="Categoryview"),
+    url(r'^categorylist/$', views.categorylist, name="categorylist"),
+    url(r'^articlelist/$', views.articlelist, name="articlelist"),
+    #Edit urls
+    url(r'^editdocs/(?P<id>\d+)/$', views.DocEditView, name="DocEditView"),
+    url(r'^CategoryEditView/(?P<id>\d+)/$', views.CategoryEditView, name="CategoryEditView"),
+    url(r'^ParentCategoryEditView/(?P<id>\d+)/$', views.ParentCategoryEditView, name="ParentCategoryEditView"),
 
 
 ]

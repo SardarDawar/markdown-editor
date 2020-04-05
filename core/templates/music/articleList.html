@@ -1,0 +1,58 @@
+{% extends 'Base.html' %}
+
+{% load static %}
+
+<!--BOOTSTRAP GRID HERE-->
+
+
+{% block content %}
+<style>
+
+    .card-img-top,img {
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+    }
+
+    </style>
+    <a class="btn btn-primary" style="margin-left: 85%;" href="{% url 'doccreate' %}"> Create Article </a>
+    <br>
+    <br>
+<div class="row">
+{% for  Parent, category in blogs.items  %}
+<div class="col-md-4">
+<div class="card " style=" width: auto;">
+    <div class="shadow p-3 bg-white rounded">
+        <div class="card-header card-img-top text-center bg-transparent border-0">
+                <a  href="{% url 'completeArticle' Parent.slug %}">{{Parent.Name}} </a>
+                <a href="{% url 'completeArticle' Parent.slug %}"><img src="/media/{{Parent.image}}" height="70%" width="70%" > </a>
+
+        </div>
+        <div class="card-body">
+            <br>
+            {% for i in category %}
+            <div  class="row">
+                <div class="col-md-6">
+            <a href="#" >{{i.title}}</a>
+         </div> 
+         <div class="col-md-4"></div>
+            <div class="col-md-2">
+                <a href="{% url 'DocEditView' i.id %}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </div>
+            </div>
+{% endfor %}
+        </div>
+    </div>
+</div><br></div><br>
+
+{% endfor %}
+<br>
+</div>
+
+
+
+
+
+</div>
+
+{% endblock %}

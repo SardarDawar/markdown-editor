@@ -271,3 +271,82 @@ def Categoryview(request):
         'form':form
     }
     return render(request,'music/category.html',context)
+
+def categorylist(request):
+    parent_cat = Parent_Category.objects.all()
+    art={}
+    for i in parent_cat:
+        cat = Category.objects.filter(Parent_Category=i)
+        art.update({i:cat})
+    print(art)
+    context = {
+        'blogs': art,
+
+    }
+    return render(request, 'music/categoryList.html', context)
+
+
+def articlelist(request):
+    parent_cat = Parent_Category.objects.all()
+    art={}
+    for i in parent_cat:
+        cat = Article.objects.filter(Parent_Category=i)
+        art.update({i:cat})
+    print(art)
+    context = {
+        'blogs': art,
+
+    }
+    return render(request, 'music/articleList.html', context)
+
+def ParentCategoryEditView(request,id):
+    obj= Parent_Category.objects.get(id=id)
+    form= ParentCategory(instance=obj)
+    if request.method=='POST':
+        form=ParentCategory(request.POST , instance=obj )
+        if form.is_valid():
+            new = form.save(commit=False)
+            new.slug=slugify(new.Name)
+            new.save()
+            form.save()
+            return redirect('list')
+    context={
+        'form':form,  
+        'object':obj 
+    }
+    return render(request,'music/postviewedit.html',context)
+
+def CategoryEditView(request,id):
+    obj= Category.objects.get(id=id)
+    form= Categoryform(instance=obj)
+    if request.method=='POST':
+        form=Categoryform(request.POST , instance=obj )
+        if form.is_valid():
+            new = form.save(commit=False)
+            new.slug=slugify(new.Name)
+            new.save()
+            form.save()
+            return redirect('list')
+    context={
+        'form':form,  
+        'object':obj 
+    }
+    return render(request,'music/postviewedit.html',context)
+
+def DocEditView(request,id):
+    obj= Article.objects.get(id=id)
+    form= docform(instance=obj)
+    if request.method=='POST':
+        form=docform(request.POST , instance=obj )
+        if form.is_valid():
+            new = form.save(commit=False)
+            new.slug=slugify(new.Parent_Category)
+            new.slug1=slugify(new.title)
+            new.save()
+            form.save()
+            return redirect('list')
+    context={
+        'form':form,  
+        'object':obj 
+    }
+    return render(request,'music/postviewedit.html',context)

@@ -15,8 +15,10 @@
     }
 
     </style>
+    <a class="btn btn-primary" style="margin-left: 90%;" href="{% url 'ParentCategoryview' %}"> Create Docs </a>
+    <br>
+    <br>
 <div class="row">
-
 {% for  blogs in article  %}
 {% if blogs.public %}
 <div class="col-md-4">
@@ -27,7 +29,15 @@
         </div>
         <div class="card-body">
             <br>
-            <h2 class="post-title" style="text-align: left; "><a href="{% url 'completeArticle' blogs.slug %}" >{{blogs.Name}}</a></h2>   
+            <div  class="row">
+                <div class="col-md-6">
+            <a href="{% url 'completeArticle' blogs.slug %}" >{{blogs.Name}}</a>
+         </div> 
+         <div class="col-md-4"></div>
+            <div class="col-md-2">
+                <a href="{% url 'ParentCategoryEditView' blogs.id %}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </div>
+            </div>
             <p class="post-title" style="text-align: left; ">{{blogs.description}}</p>   
 
         </div>
@@ -50,8 +60,18 @@
                     <a href="{% url 'completeArticle' blogs.slug %}"><img src="/media/{{blogs.image}" height="70%" width="70%" > </a>
             </div>
             <div class="card-body" >
-                <h2 class="post-title"><a href="{% url 'completeArticle' blogs.slug %}" >{{blogs.Name}}</a></h2>   
-                <h2 class="post-title">{{blogs.description}}</h2>   
+                <div  class="row">
+                    <div class="col-md-6">
+                <a href="{% url 'completeArticle' blogs.slug %}" >{{blogs.Name}}</a>
+             </div> 
+             <div class="col-md-4"></div>
+                <div class="col-md-2">
+                    <a href="{% url 'ParentCategoryEditView' blogs.id %}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </div>
+                </div>
+              
+
+                <p class="post-title">{{blogs.description}}</p>   
             </div>
         </div>
     </div></div><br>
