@@ -1,13 +1,13 @@
 {% extends 'Base.html' %}
-
 {% load static %}
-
 {% block title %}{{blogs.title}} | {{block.super}}{% endblock %}
-
-
 {% block content %}
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</link>
+
 <div class="sidenav">
+
     <!--Styling of accordion-->
     <style type="text/css">
         [data-toggle="collapse"]:after {
@@ -27,82 +27,52 @@
             transform: rotate(0deg);
         }
     </style>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+    <style>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    </link>
+.btn,
+.btn:active,
+.btn:focus,
+.btn:visited {
+background-color: white !important;
+    border: none !important;
+}
 
- <!-- Styling Ends Here -->
+.btn-link,
+.btn-link:visited,
+.btn:focus,
+.btn:active,
+.btn:hover {
+    font-weight: bold;
+    color: rgb(13, 172, 92);
+    text-decoration: none !important;
+}
+    </style>
 
-    <br><br>
-    
-    <div id="accordion" role="tablist">
-        <div id="headingZero">
-            <h5 >
-                <a style="color: black;" data-toggle="collapse" href="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
-                    {{Parent.Name}}
-                </a>
-            </h5>
-
-
-        </div>
-        <div id="collapseZero"  aria-labelledby="headingZero" style="padding-left: 10%;">
-  
-        <div>
-            {% for category , articles in lis.items %}
-            {% if forloop.counter == 1 %}
-            <div id="headingOne">
-                <h5  >
-                    <a  style="color: black;" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        {{category}}
-                    </a>
-                </h5>
-            </div>
-            <div id="collapseOne" class="collapse "  aria-labelledby="headingOne"
-                data-parent="#accordion">
-                <div style="padding-left: 5%;" >
-
-                    {% for article in articles %}
-                    <a style="color: gray;" href="{% url 'detail' article.slug1 %}">{{article}}</a>
-                    {% endfor %}
-
-
-                </div>
-            </div>
-            {% endif %}
+    <!-- Side Bar Collapse -->
+    <div class="accordion" id="accordionExample">
+        <button class="btn btn-link mt-5" style="color: black;" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" id="headingOne">
+            {{Parent.Name}}
+          </button>      
+      <div id="collapseOne" class="ml-3 collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        {% for category , articles in lis.items %}
+        <div class="accordion" id="accordion{{category}}">
+        <button class="btn btn-link collapsed" style="color: black;" type="button" data-toggle="collapse" data-target="#collapse{{category}}" aria-expanded="false" aria-controls="collapse{{category}}" id="heading{{category}}">
+            {{category}}
+          </button>
+          <div id="collapse{{category}}" class="collapse show" aria-labelledby="heading{{category}}" data-parent="#accordion{{category}}">
+            {% for article in articles %}
+            <a style="color: gray;" href="{% url 'detail' article.slug1 %}">{{article}}</a>
             {% endfor %}
+          </div>
         </div>
-     
+        {% endfor %}
+      </div>
 
-        <div >
-            {% for category , articles in lis.items %}
-            {% if forloop.counter > 1 %}
-            <div  id="headingtwo">
-                <h5 >
-                    <a style="color: black;" data-toggle="collapse" href="#collapsetwo" aria-expanded="true" aria-controls="collapseOne">
-                        {{category}}
-                    </a>
-                </h5>
-            </div>
-            <div id="collapsetwo" class="collapse "  aria-labelledby="headingtwo"
-                data-parent="#accordion">
-                <div style="padding-left: 5%;">
-                    {% for article in articles %}
-                    <a href="{% url 'detail' article.slug1 %}" style="color: grey;">{{article}}</a>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endif %}
-            {% endfor %}
+      </div>
 
-        </div>
-    </div>
+    <!-- End of Side Bar Collapse -->
 
-
-
-</div>
 </div>
 {% if blogs %}
 
@@ -130,29 +100,30 @@
     {% endblock %}
     {% else %}
     <h3 style="text-align: center;">{{Parent}}</h3>
-    <!-- <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" style="background-image: url(/media/{{Parent.image}});height:500px; background-repeat: no-repeat;
-    ">
-    </main> -->
+
+
+</main>
     {% endif %}
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+
+
+
+
 
     {% endblock %}
 
-
-
-
-
-    <!-- <div id="accordion">
-    {% for category , articles in lis.items %}
-
-    <h3>{{category}}</h3>
-
-    <p>
-        {% for article in articles %}
-        <a href="{% url 'detail' article.slug1 %}">{{article}}</a>
-        {% endfor%}
-
-    </p>
-
-    {% endfor %}
-
-</div> -->
